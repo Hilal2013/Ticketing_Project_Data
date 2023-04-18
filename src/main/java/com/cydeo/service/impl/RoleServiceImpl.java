@@ -41,6 +41,7 @@ List<Role> roleList=roleRepository.findAll();//it comes from Jpa//implementation
 
     @Override
     public RoleDTO findById(Long id) {
-        return null;
+
+        return roleMapper.convertToDto( roleRepository.findById(id).get());
     }
 }
