@@ -43,11 +43,22 @@ List<User> userList=userRepository.findAll(Sort.by("firstName"));
 
         userRepository.save(userMapper.convertToEntity(user));
 
-
     }
 
     @Override
-    public void deleteByUserName(String username) {
-       // userRepository.deleteByUserName(username);
+    public void update(UserDTO user) {
+//convert user dto to entity object//Find current user// set id
+  User user1=   userRepository.findByUserName(userMapper.convertToEntity(user).getUserName());
+      //set id of entity user to the converted object
+User convertedUser=userMapper.convertToEntity(user);
+  convertedUser.setId(user1.getId());
+userRepository.save(convertedUser);
+
     }
+    @Override
+    public void deleteByUserName(String username) {
+         userRepository.deleteByUserName(username);
+
+    }
+
 }
