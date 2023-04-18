@@ -35,7 +35,7 @@ List<User> userList=userRepository.findAll(Sort.by("firstName"));
     public UserDTO findByUserName(String username) {
 
 
-        return null;
+        return userMapper.convertToDto(userRepository.findByUserName(username));
     }
 
     @Override
@@ -48,6 +48,6 @@ List<User> userList=userRepository.findAll(Sort.by("firstName"));
 
     @Override
     public void deleteByUserName(String username) {
-
+       // userRepository.deleteByUserName(username);
     }
 }
