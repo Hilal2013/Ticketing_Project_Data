@@ -75,4 +75,13 @@ return findByUserName(user.getUserName());
 
 
     }
+
+    @Override
+    public List<UserDTO> listAllByRole(String role) {
+        //go to db //bring all users with spesific role//if I pass manager  is gonna bring manager users
+
+        return userRepository.findByRoleDescriptionIgnoreCase(role).stream()
+                .map(entity->userMapper.convertToDto(entity))
+                .collect(Collectors.toList());
+    }
 }
