@@ -19,8 +19,8 @@ public class TaskMapper {
         return modelMapper.map(dto,Task.class);
 
     }
-
     public TaskDTO convertToDto(Task entity){
+
         return modelMapper.map(entity,TaskDTO.class);
     }
 
