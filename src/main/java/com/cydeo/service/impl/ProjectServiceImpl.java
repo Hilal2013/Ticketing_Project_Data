@@ -54,7 +54,7 @@ public class ProjectServiceImpl implements ProjectService {
         //save the object in database
   Project project=projectRepository.findByProjectCode(projectCode);
   project.setIsDeleted(true);
-  projectRepository.save(project);projectRepository.save(project);
+  projectRepository.save(project);
     }
 
     @Override
