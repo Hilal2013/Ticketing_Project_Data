@@ -61,6 +61,8 @@ if(foundTask.isPresent()){
         return null;
     }
 
+
+
     @Override
     public void update(TaskDTO dto) {
 Optional<Task> task=taskRepository.findById(dto.getId());
@@ -73,4 +75,15 @@ if(task.isPresent()){// already setId in Controller
 }
 
     }
+    @Override
+    public int totalNonCompletedTask(String projectCode) {
+        return taskRepository.totalNonCompletedTasks(projectCode);
+    }
+
+    @Override
+    public int totalCompletedTask(String projectCode) {
+        return taskRepository.totalCompletedTasks(projectCode);
+    }
+
+
 }
