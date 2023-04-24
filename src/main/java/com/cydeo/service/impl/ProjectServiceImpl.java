@@ -1,12 +1,16 @@
 package com.cydeo.service.impl;
 
 import com.cydeo.dto.ProjectDTO;
+import com.cydeo.dto.UserDTO;
 import com.cydeo.entity.Project;
 import com.cydeo.entity.User;
 import com.cydeo.enums.Status;
 import com.cydeo.mapper.ProjectMapper;
+import com.cydeo.mapper.UserMapper;
 import com.cydeo.repository.ProjectRepository;
 import com.cydeo.service.ProjectService;
+import com.cydeo.service.TaskService;
+import com.cydeo.service.UserService;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -17,10 +21,16 @@ import java.util.stream.Collectors;
 public class ProjectServiceImpl implements ProjectService {
     private final ProjectRepository projectRepository;
     private final ProjectMapper projectMapper;
+    private final UserService userService;
+    private final UserMapper userMapper;
+    private final TaskService taskService;
 
-    public ProjectServiceImpl(ProjectRepository projectRepository, ProjectMapper projectMapper) {
+    public ProjectServiceImpl(ProjectRepository projectRepository, ProjectMapper projectMapper, UserService userService, UserMapper userMapper, TaskService taskService) {
         this.projectRepository = projectRepository;
         this.projectMapper = projectMapper;
+        this.userService = userService;
+        this.userMapper = userMapper;
+        this.taskService = taskService;
     }
 
     @Override
@@ -82,7 +92,24 @@ public class ProjectServiceImpl implements ProjectService {
     }
     @Override
     public List<ProjectDTO> listAllProjectDetails() {
-        return null;
+        //we need to get manager and I need to go tadabase bring assigned projects to manager with infos
+//now it is coming UI not service//this portion is login who logged in //hard code
+        UserDTO currentUserDTO = userService.findByUserName("harold@manager.com");
+        // I need to go to database
+        User userManager = userMapper.convertToEntity(currentUserDTO);
+//hey Db give me all projects assigned to manager login in the system//I need all project belongs to this user
+        List<Project> list=projectRepository.findByAssignedManager(userManager); //now I have the projects
+//I dont have completed and unfinished task count fields in the table//my dto has two fields
+        //get each project convertToEnty
+       return list.stream()
+               .map(project->{
+           ProjectDTO convertedProject=projectMapper.convertToDto(project);
+           convertedProject.setUnfinishedTaskCounts(taskService.totalNonCompletedTask(project.getProjectCode()));
+           //give me the project Task service is gonna find not completed tasks
+           convertedProject.setCompleteTaskCounts(taskService.totalCompletedTask(project.getProjectCode()));
+           return convertedProject;
+       }
+       ).collect(Collectors.toList());
     }
 
 }
