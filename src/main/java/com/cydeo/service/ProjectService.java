@@ -12,6 +12,7 @@ void save(ProjectDTO dto);
 void update(ProjectDTO dto);
 void delete(String projectCode);
 void complete(String projectCode);
+    List<ProjectDTO> listAllProjectDetails();
 
 
 }
