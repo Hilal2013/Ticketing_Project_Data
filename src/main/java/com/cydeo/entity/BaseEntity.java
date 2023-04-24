@@ -29,7 +29,6 @@ public class BaseEntity {
     @Column(nullable = false)
     private Long lastUpdateUserId;
 
-
     //this method needs to be executed whenever we create the object=>a new user/project/manager
     @PrePersist//trying save//
     private void onPrePersist(){
