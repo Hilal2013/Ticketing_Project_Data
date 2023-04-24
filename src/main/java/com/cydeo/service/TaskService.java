@@ -12,4 +12,7 @@ List<TaskDTO> listAllTasks();
     void delete(Long id);//we dont have any unique// actually id is for database but here no unique
     // if you have unique field like username use them//actually we should have put task code but now it is ok
     TaskDTO findById(Long id);
+int totalNonCompletedTask(String projectCode);
+int totalCompletedTask(String projectCode);
+
 }
