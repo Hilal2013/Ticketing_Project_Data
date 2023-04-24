@@ -17,7 +17,7 @@ import java.time.LocalDate;
 @Where(clause="is_deleted=false")
 public class Project extends BaseEntity{
 
-
+@Column(unique=true)//Database wont create any project with the  same project code//now we defined this field as unique
     private String projectCode;
     private String projectName;
 
