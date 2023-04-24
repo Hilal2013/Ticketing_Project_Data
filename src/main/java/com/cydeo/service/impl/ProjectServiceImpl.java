@@ -65,7 +65,6 @@ public class ProjectServiceImpl implements ProjectService {
         projectRepository.save(project);
 
     }
-
     @Override
     public void update(ProjectDTO dto) {
 
@@ -81,6 +80,9 @@ public class ProjectServiceImpl implements ProjectService {
 
 
     }
-
+    @Override
+    public List<ProjectDTO> listAllProjectDetails() {
+        return null;
+    }
 
 }
