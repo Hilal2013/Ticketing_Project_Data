@@ -13,7 +13,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @Entity
 @Table(name = "users")
-@Where(clause="is_deleted=false")
+//@Where(clause="is_deleted=false")// SELECT * FROM users WHERE id = 4 AND is_deleted = false;null
 public class User extends BaseEntity {
 
     private String firstName;
