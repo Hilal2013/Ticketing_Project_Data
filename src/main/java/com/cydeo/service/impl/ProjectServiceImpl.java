@@ -64,7 +64,12 @@ public class ProjectServiceImpl implements ProjectService {
         //save the object in database
   Project project=projectRepository.findByProjectCode(projectCode);
   project.setIsDeleted(true);
+        project.setProjectCode(project.getProjectCode() + "-" + project.getId());
+        //after deletion change the unique number and save// so i can use previous project code for another project
   projectRepository.save(project);
+  //if the project is deleted we should delete task
+        taskService.deleteByProject(projectMapper.convertToDto(project));
+
     }
 
     @Override
@@ -73,6 +78,8 @@ public class ProjectServiceImpl implements ProjectService {
         Project project=projectRepository.findByProjectCode(projectCode);
     project.setProjectStatus(Status.COMPLETE);
         projectRepository.save(project);
+//for complete task
+        taskService.completeByProject(projectMapper.convertToDto(project));
 
     }
     @Override
