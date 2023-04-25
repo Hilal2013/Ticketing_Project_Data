@@ -1,6 +1,7 @@
 package com.cydeo.service;
 
 import com.cydeo.dto.ProjectDTO;
+import com.cydeo.dto.UserDTO;
 
 import java.util.List;
 
@@ -13,6 +14,6 @@ void update(ProjectDTO dto);
 void delete(String projectCode);
 void complete(String projectCode);
     List<ProjectDTO> listAllProjectDetails();
-
+List<ProjectDTO> listAllNonCompletedByAssignedManager(UserDTO assignedManager);
 
 }
