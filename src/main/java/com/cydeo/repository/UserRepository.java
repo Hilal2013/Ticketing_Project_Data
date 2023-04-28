@@ -13,8 +13,8 @@ public interface UserRepository extends JpaRepository<User,Long> {
     //derived query
    // User findByUserName(String username);
     User findByUserNameAndIsDeleted(String username, Boolean deleted);
-    @Transactional
-    void deleteByUserName(String username);
+   // @Transactional
+   // void deleteByUserName(String username);
     //maybe you deleted in the UI but not database/use transactional
     //you can put on class level
     //but dont forget not delete from database delete from UI
