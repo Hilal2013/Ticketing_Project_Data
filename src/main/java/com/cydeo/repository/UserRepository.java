@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 public interface UserRepository extends JpaRepository<User,Long> {
-    List<User> findAllByIsDeletedOrderByFirstNameDesc(Boolean deleted);
+ List<User> findAllByIsDeletedOrderByFirstNameDesc(Boolean deleted);
     //get user based on username
     //derived query
    // User findByUserName(String username);
