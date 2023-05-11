@@ -19,7 +19,7 @@ public class BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Boolean isDeleted=false;
+    private Boolean isDeleted=false;//whenever i delete that field needs to be true
     @Column(nullable = false,updatable = false)
     private LocalDateTime insertDateTime;
     @Column(nullable = false,updatable = false)
